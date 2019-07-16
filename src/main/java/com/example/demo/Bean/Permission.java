@@ -31,5 +31,5 @@ public class Permission implements Serializable {
     /**
      * 更新时间
      */
-    private String upDate;
+    private String upTime;
 }

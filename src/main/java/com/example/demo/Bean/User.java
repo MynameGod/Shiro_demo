@@ -41,15 +41,11 @@ public class User implements Serializable {
      */
     private Integer status;
     /**
-     *
-     */
-    private String avatar;
-    /**
      *创建时间
      */
     private String createData;
     /**
      *更新时间
      */
-    private String upData;
+    private String upTime;
 }

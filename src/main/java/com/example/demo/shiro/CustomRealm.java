@@ -12,6 +12,7 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -24,11 +25,12 @@ import java.util.List;
  * @author: whh
  * @create: 2019-07-15 15:18
  */
+@Component
 public class CustomRealm extends AuthorizingRealm {
     private final static Logger logger = LoggerFactory.getLogger(CustomRealm.class);
-    @Resource(name="userService")
+    @Resource
     private UserService userService;
-    @Resource(name="roleService")
+    @Resource
     private RoleService roleService;
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
@@ -60,7 +62,7 @@ public class CustomRealm extends AuthorizingRealm {
             logger.error("用户 { "+token.getUsername()+" } 被禁止登录 ");
             throw new DisabledAccountException("账号已经禁止登录");
         }else{
-            user.setUpData(LocalDate.now().toString());
+            user.setUpTime(LocalDate.now().toString());
             System.out.println("效验更新前ROLE："+user.getRole().getRId());
             userService.update(user,true,user.getId());
         }
